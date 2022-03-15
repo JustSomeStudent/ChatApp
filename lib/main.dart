@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter+=20;
+      _counter+=40;
     });
   }
 
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'We add 20 apples every time we press the button:',
+              'We add 40 apples every time we press the button:',
             ),
             Text(
               '$_counter apples',
