@@ -16,32 +16,44 @@ class MyApp extends StatelessWidget {
 
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
-          title: const Text ('Testing text!'),
+          centerTitle: true,
+          title: const Text ('MixChat v0.1'),
         ),
 
         backgroundColor: Colors.blueGrey,
 
-
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-
-          },
-        ),
         body: Container(
           child: Column(
-            children: const [
-              Text ('Text on the screen',
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  [
+              const Text ('Prisijungimas',
                 style: TextStyle(fontSize: 40),
               ),
-              TextField(
-                decoration: InputDecoration(
+
+              TextFormField(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   icon: Icon(Icons.perm_identity),
                   labelText: 'Vartotojo vardas',
 
                 ),
               ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.perm_identity),
+                  labelText: 'Slaptažodis',
+
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150, 40),
+                    shape: const StadiumBorder()
+                ),
+                  child: const Text("LOGIN"),
+                  onPressed: (){},
+              )
             ],
           ),
           decoration: const BoxDecoration(
