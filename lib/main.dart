@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold (
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blueAccent,
           title: const Text ('Testing text!'),
         ),
 
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blueGrey,
 
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
             style: TextStyle(fontSize: 40),
           ),
         ),
+
 
       ),
     );
