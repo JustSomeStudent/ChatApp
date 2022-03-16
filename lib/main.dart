@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
           title: const Text ('Testing text!'),
         ),
 
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.blue,
 
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
