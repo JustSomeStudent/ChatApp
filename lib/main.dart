@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ),
         body: Container(
           child: const Text ('Text on the screen',
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(fontSize: 50),
 
           ),
           alignment: Alignment.center,
