@@ -30,39 +30,30 @@ class MyApp extends StatelessWidget {
         ),
         body: Container(
           child: Column(
-            children: [
-              Container(
+            children: const [
+              Text ('Text on the screen',
+                style: TextStyle(fontSize: 40),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.perm_identity),
+                  labelText: 'Vartotojo vardas',
 
-
-          child: const Text ('Text on the screen',
-            style: TextStyle(fontSize: 40),
+                ),
+              ),
+            ],
           ),
-          alignment: Alignment.center,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/img/kalnai.jpg"),
-                  fit: BoxFit.cover,
+              fit: BoxFit.cover,
               opacity: 0.5,
             ),
           ),
-              ),
-              Container(
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.perm_identity),
-                    labelText: 'Vartotojo vardas',
-
-                  ),
-                ),
-
-              ),
-        ],
         ),
-
-    ),
       ),
-        );
+    );
 
   }
 
