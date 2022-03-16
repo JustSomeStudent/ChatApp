@@ -24,12 +24,21 @@ class MyApp extends StatelessWidget {
 
           },
         ),
-        body: const Center(
-          child: Text ('Text on the screen',
+        body: Container(
+          child: const Text ('Text on the screen',
             style: TextStyle(fontSize: 40),
+
+          ),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/img/kalnai.jpg"),
+                  fit: BoxFit.cover,
+              opacity: 0.5,
+
+            )
           ),
         ),
-
 
       ),
     );
