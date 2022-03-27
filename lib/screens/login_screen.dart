@@ -33,26 +33,55 @@ class _SignInState extends State<SignIn> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   icon: Icon(Icons.perm_identity),
-                  labelText: 'Vartotojo vardas',
+                  labelText: 'Vartotojo vardas arba el. paštas',
 
                 ),
               ),
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  icon: Icon(Icons.perm_identity),
+                  icon: Icon(Icons.lock),
                   labelText: 'Slaptažodis',
 
                 ),
               ),
+
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.white70,
+                ),
+                child: const Text("Pamiršau slaptažodį"),
+                onPressed: (){},
+              ),
+              
+
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(150, 40),
                     shape: const StadiumBorder()
                 ),
-                child: const Text("LOGIN"),
+                child: const Text("PRISIJUNGTI"),
                 onPressed: (){},
+              ),
+
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.white70,
+                ),
+                child: const Text("Dar neužsiregistravęs?"),
+                onPressed: (){},
+              ),
+
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(150, 40),
+                      shape: const StadiumBorder()
+                  ),
+                  child: const Text('REGISTRUOTIS'),
+                  onPressed: (){},
               )
+
             ],
           ),
           decoration: const BoxDecoration(
