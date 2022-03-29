@@ -8,6 +8,32 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
+  final _form = GlobalKey<FormState>();
+  bool _isValid = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+
+  String _password = '';
+
+
+  void _trySubmitForm() {
+    final bool? isValid = _formKey.currentState?.validate();
+    if (isValid == true) {
+      debugPrint('Puiku!');
+      debugPrint(_password);
+
+    }
+  }
+
+
+  void _saveForm() {
+    setState(() {
+      _isValid = _form.currentState!.validate();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,10 +67,27 @@ class _SignInState extends State<SignIn> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   icon: Icon(Icons.lock),
-                  labelText: 'Slaptažodis',
-
+                  labelText: 'Slaptažodis'),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Šis laukas yra privalomas';
+                    }
+                    if (value.trim().length < 8) {
+                      return 'Slaptažodį turi sudaryti min 8 simboliai';
+                    }
+                    if (!RegExp(r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#$&*~]).{8,}$')
+                        .hasMatch(value)) {
+                      return 'Slaptažodį turi sudaryti bent viena didžioji raidė, simbolis';
+                    }
+                    // Return null if the entered password is valid
+                    return null;
+                  },
+                  onChanged: (value) => _password = value,
                 ),
-              ),
+
+
+
 
               TextButton(
                 style: TextButton.styleFrom(
