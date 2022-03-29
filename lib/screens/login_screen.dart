@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mix_chat_app/screens/forgot_password_screen.dart';
+import 'package:mix_chat_app/screens/registration_screen.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -37,6 +39,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold (
 
         appBar: AppBar(
@@ -48,6 +51,7 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.blueGrey,
 
         body: Container(
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children:  [
@@ -94,7 +98,9 @@ class _SignInState extends State<SignIn> {
                   primary: Colors.white70,
                 ),
                 child: const Text("Pamiršau slaptažodį"),
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ForgotPassword()));},
               ),
               
 
@@ -122,17 +128,24 @@ class _SignInState extends State<SignIn> {
                       shape: const StadiumBorder()
                   ),
                   child: const Text('REGISTRUOTIS'),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Registration()));
+                  },
               )
 
             ],
           ),
           decoration: const BoxDecoration(
+
             image: DecorationImage(
               image: AssetImage("lib/img/kalnai.jpg"),
               fit: BoxFit.cover,
               opacity: 0.5,
             ),
+
+                color: Colors.white,
+
           ),
         ),
       ),

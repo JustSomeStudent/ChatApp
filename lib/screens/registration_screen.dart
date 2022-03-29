@@ -39,22 +39,22 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold (
+
+        backgroundColor: Colors.transparent,
 
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
           title: const Text ('MixChat v0.1'),
         ),
-
-        backgroundColor: Colors.blueGrey,
-
         body: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children:  [
               const Text ('Vartotojo anketa',
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
 
               TextFormField(
@@ -191,7 +191,7 @@ class _RegistrationState extends State<Registration> {
             ],
           ),
           decoration: const BoxDecoration(
-              color: Colors.white60
+              color: Colors.white,
 
           ),
         ),
