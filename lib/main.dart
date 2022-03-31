@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_chat_app/screens/forgot_password_screen.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
-import 'package:mix_chat_app/screens/registration_screen.dart';
 
 
 void main() {
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SignIn(),
     );
