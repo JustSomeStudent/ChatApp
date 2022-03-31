@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mix_chat_app/screens/forgot_password_screen.dart';
+import 'package:mix_chat_app/screens/main_screen.dart';
 import 'package:mix_chat_app/screens/registration_screen.dart';
 
 class SignIn extends StatefulWidget {
@@ -111,7 +112,11 @@ class _SignInState extends State<SignIn> {
                     shape: const StadiumBorder()
                 ),
                 child: const Text("PRISIJUNGTI"),
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+                      builder: (context) => ChatRoom()
+                  ));
+                },
               ),
 
               TextButton(
