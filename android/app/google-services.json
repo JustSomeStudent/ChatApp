@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618014685743",
+    "project_id": "mixchat-2b17e",
+    "storage_bucket": "mixchat-2b17e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618014685743:android:beaf58baec0bd5a838a4da",
+        "android_client_info": {
+          "package_name": "com.example.mix_chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618014685743-btr4dv7sit4s4hb6u458ebthchoa8vur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAw2omiTcydkLCMTcq8JcNazONuPubmNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618014685743-btr4dv7sit4s4hb6u458ebthchoa8vur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
