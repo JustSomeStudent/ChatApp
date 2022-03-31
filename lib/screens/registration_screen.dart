@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_chat_app/screens/login_screen.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
@@ -48,6 +49,15 @@ class _RegistrationState extends State<Registration> {
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
           title: const Text ('MixChat v0.1'),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ), onPressed: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SignIn()));},
+
+          ),
         ),
         body: Container(
           child: Column(
