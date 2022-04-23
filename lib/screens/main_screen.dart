@@ -3,7 +3,11 @@ import 'package:mix_chat_app/screens/conversation_screen.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
 
 class ChatRoom extends StatefulWidget {
+  static Route get route => MaterialPageRoute(
+    builder: (context) => ChatRoom(),
+  );
   const ChatRoom({Key? key}) : super(key: key);
+
 
   @override
   State<ChatRoom> createState() => _ChatRoomState();
