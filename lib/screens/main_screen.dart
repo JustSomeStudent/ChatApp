@@ -21,7 +21,7 @@ class _ChatRoomState extends State<ChatRoom> {
           appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
-        title: const Text ('Main Screen: Contacts'),
+        title: const Text ('Pagrindinis langas: kontaktai'),
         actions: [
           GestureDetector(
             onTap: (){
@@ -47,7 +47,7 @@ class _ChatRoomState extends State<ChatRoom> {
                       minimumSize: const Size(150, 40),
                       shape: const StadiumBorder()
                   ),
-                  child: const Text('Send Message'),
+                  child: const Text('Siųsti žinutę'),
                   onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Conversation()

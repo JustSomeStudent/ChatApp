@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mix_chat_app/screens/account_screen.dart';
 /*import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';*/
 
 
@@ -234,6 +235,11 @@ import 'package:flutter/material.dart';
                   child: ElevatedButton(
                     onPressed: _registration,
                     child: const Text('Sukurti paskyrą'),
+                    /*onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AccountScreen()
+                          ));
+                    }*/
                   ),
                 ),
 
