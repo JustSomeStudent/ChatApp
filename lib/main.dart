@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:mix_chat_app/screens/login_screen.dart';
-import 'package:mix_chat_app/screens/auth.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 
 void main() async {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SignIn(),
     );

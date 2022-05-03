@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 class AccountScreen extends StatefulWidget {
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
 class _AccountScreenState extends State<AccountScreen>{
+
+  void deleteAccount() async{
+
+    var currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser != null) {
+      print(currentUser.uid);
+    }
+    try {
+      await FirebaseAuth.instance.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        print('The user must reauthenticate before this operation can be executed.');
+      }
+    }
+  }
+
+
   bool isObscurePassword = true;
   Widget build(BuildContext context){
     return Scaffold(
@@ -218,7 +238,12 @@ class _AccountScreenState extends State<AccountScreen>{
 
                    ),
                    child: const Text("Ištrinti profilį"),
-                   onPressed: (){},
+                   onPressed: (){
+                     deleteAccount();
+                     Navigator.push(context,
+                         MaterialPageRoute(builder: (context) => SignIn()
+                         ));
+                   },
                  ),
                ],
              )
@@ -229,3 +254,4 @@ class _AccountScreenState extends State<AccountScreen>{
     );
   }
 }
+

@@ -157,9 +157,9 @@ import 'package:mix_chat_app/screens/account_screen.dart';
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('abc'),
+        title: const Text('MixChat v0.1'),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.blue,
         elevation: 0,
       ),
       body: (_loading)
