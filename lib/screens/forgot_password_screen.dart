@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -6,105 +8,96 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  bool _loading = false;
+  final _emailRegex = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+  void dispose(){
+    emailController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
           title: const Text ('MixChat v0.1'),
         ),
-      body: Stack(
-        children: [
-          Container(
-           // decoration: BoxDecoration(
-                color: Colors.white,
-                //borderRadius: BorderRadius.only(
-                //    topLeft: Radius.circular(20),
-                //    topRight: Radius.circular(20))),
-            child: ListView(
+      body: (_loading)
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: height * 0.08),
-                Text(
-                  'reset password'.toUpperCase(),
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Center(
-                  child: Container(
-                    height: 1,
-                    width: width * 0.8,
-                    color: Colors.grey,
+                const Padding(
+                  padding: EdgeInsets.only(top: 160, bottom: 24),
+                  child: Text(
+                    'RESET PASSWORD',
+                    style: TextStyle(
+                        fontSize: 26, fontWeight: FontWeight.w800),
                   ),
                 ),
-                SizedBox(
-                  height: height * 0.15,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: emailController,
+                    validator: _emailInputValidator,
+                    decoration: const InputDecoration(hintText: 'El. paštas'),
+                    keyboardType: TextInputType.emailAddress,
+                    autofillHints: const [AutofillHints.email],
+                  ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: width * 0.05),
-                  child: TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        hintText: "EL.paštas ",
-                        hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold, letterSpacing: 1.8),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                              width: 1,
-                              style: BorderStyle.solid,
-                              color: Colors.blue),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        contentPadding: EdgeInsets.all(12),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                              width: 1,
-                              style: BorderStyle.solid,
-                              color: Colors.blue),
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  height: height * 0.08,
-                ),
-                Center(
-                  child: Container(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: 26, vertical: 10),
-                    decoration: BoxDecoration(
-
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.blue,
-                              offset: Offset(2, 2))
-                        ]),
-                    child: Text(
-                      "Reset".toUpperCase(),
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.7),
-                      textAlign: TextAlign.center,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      resetPassword();
+                    },
+                    child: const Text('Reset'),
                   ),
                 ),
               ],
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
+  }
+
+  Future resetPassword() async {
+    showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(child: CircularProgressIndicator()));
+    try{
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Password Reset Email Sent'),
+      ));
+
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    } on FirebaseAuthException catch(e){
+      Navigator.of(context).pop();
+    }
+  }
+
+  String? _emailInputValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Negali būti tuščia!!';
+    }
+    if (!_emailRegex.hasMatch(value)) {
+      return 'Netinkamas el.paštas';
+    }
+    return null;
   }
 }

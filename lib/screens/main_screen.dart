@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mix_chat_app/screens/conversation_screen.dart';
+import 'package:mix_chat_app/screens/forgot_password_screen.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -50,7 +51,7 @@ class _ChatRoomState extends State<ChatRoom> {
                   child: const Text('Siųsti žinutę'),
                   onPressed: (){
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Conversation()
+                        MaterialPageRoute(builder: (context) => ForgotPassword()
                         ));
                     },
                 )
