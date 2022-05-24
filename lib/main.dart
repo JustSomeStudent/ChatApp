@@ -7,7 +7,7 @@ import 'package:mix_chat_app/screens/main_screen.dart';
 import 'package:mix_chat_app/screens/registration_screen.dart';
 import 'package:mix_chat_app/screens/chat_screen.dart';
 
-
+////jhfsa
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
