@@ -1,76 +1,72 @@
-import 'package:flutter/material.dart';
-import 'package:mix_chat_app/screens/conversation_screen.dart';
-import 'package:mix_chat_app/screens/forgot_password_screen.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
+import 'package:mix_chat_app/screens/registration_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'rounded_button.dart';
 
-class ChatRoom extends StatefulWidget {
-  static Route get route => MaterialPageRoute(
-    builder: (context) => ChatRoom(),
-  );
-  const ChatRoom({Key? key}) : super(key: key);
+class WelcomeScreen extends StatefulWidget {
+  static const String id = 'welcome_screen';
+
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+
 
 
   @override
-  State<ChatRoom> createState() => _ChatRoomState();
-}
+  void dispose() {
 
-class _ChatRoomState extends State<ChatRoom> {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold (
-          appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        centerTitle: true,
-        title: const Text ('Pagrindinis langas: kontaktai'),
-        actions: [
-          GestureDetector(
-            onTap: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) => SignIn()
-              ));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
-          )
-        ],
-      ),
-          floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        onPressed: (){
-        },
-      ),
-          body: Container(
-
-            child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(150, 40),
-                      shape: const StadiumBorder()
+    return Scaffold(
+      backgroundColor: Colors.amberAccent,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Hero(
+                  tag: 'logo',
+                  child: Container(
+                    child: Image.asset('images/logo.png'),
+                    height: 60,
                   ),
-                  child: const Text('Siųsti žinutę'),
-                  onPressed: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ForgotPassword()
-                        ));
-                    },
-                )
+                ),
 
+
+              ],
             ),
-
-
-/*
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("lib/img/kalnai.jpg"),
-                fit: BoxFit.cover,
-                opacity: 0.5,
-              ),
+            const SizedBox(
+              height: 48.0,
             ),
-
- */
-
-          )
-      );
+            RoundedButton(
+                title: 'Prisijungti',
+                color: Colors.lightBlueAccent,
+                onPressed: () {
+                  Navigator.pushNamed(context, SignIn.id);
+                }),
+            RoundedButton(
+                color: Colors.blueAccent,
+                title: 'Registruotis',
+                onPressed: () {
+                  Navigator.pushNamed(context, Registration.id);
+                })
+          ],
+        ),
+      ),
+    );
   }
 }
+
+
+
+

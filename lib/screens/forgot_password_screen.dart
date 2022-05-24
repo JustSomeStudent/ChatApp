@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
+
 class ForgotPassword extends StatefulWidget {
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
@@ -91,7 +92,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     }
   }
 
-  String? _emailInputValidator(String? value) {
+  String _emailInputValidator(String value) {
     if (value == null || value.isEmpty) {
       return 'Negali būti tuščia!!';
     }
@@ -101,3 +102,4 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return null;
   }
 }
+

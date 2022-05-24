@@ -1,193 +1,171 @@
+import 'package:mix_chat_app/constants.dart';
+import 'package:mix_chat_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:mix_chat_app/screens/forgot_password_screen.dart';
-import 'package:mix_chat_app/screens/main_screen.dart';
-import 'package:mix_chat_app/screens/registration_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase;
+import 'rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
-/*import 'package:cloud_functions/cloud_functions.dart';*/
-/*import 'package:mix_chat_app/app.dart';*/
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignIn extends StatefulWidget {
-  static Route get route => MaterialPageRoute(
-    builder: (context) => const SignIn(),
-  );
-  const SignIn({Key? key}) : super(key: key);
+  static const String id = 'login_screen';
 
   @override
-  State<SignIn> createState() => _SignInState();
+  _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
-  final auth = firebase.FirebaseAuth.instance;
-  final functions = FirebaseAuth.instance;
-
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _emailRegex = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
-  bool _loading = false;
-
-  Future<void> _signIn() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        _loading = true;
-      });
-      try {
-        // Authenticate with Firebase
-        final creds =
-        await firebase.FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-
-        final user = creds.user;
-
-        if (user == null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('User is empty')),
-          );
-          return;
-        }
-
-        // Get Stream user token from Firebase Functions
-        /* final callable = functions.httpsCallable('getStreamUserToken');
-        final results = await callable();
-
-        // Connnect stream user
-        final client = StreamChatCore.of(context).client;
-        await client.connectUser(
-          User(id: creds.user!.uid),
-          results.data,
-        );*/
-
-        // Navigate to home screen
-        await Navigator.of(context).pushReplacement(ChatRoom.route);
-      } on firebase.FirebaseAuthException catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message ?? 'Auth error')),
-        );
-      } /*catch (e, st) {
-        logger.e('Sign in error, ', e, st);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('An error occured')),
-        );
-      }*/
-      setState(() {
-        _loading = false;
-      });
-    }
-  }
-
-  String? _emailInputValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Cannot be empty';
-    }
-    if (!_emailRegex.hasMatch(value)) {
-      return 'Not a valid email';
-    }
-    return null;
-  }
-
-  String? _passwordInputValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Cannot be empty';
-    }
-    if (value.length <= 6) {
-      return 'Password needs to be longer than 6 characters';
-    }
-    return null;
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+  final _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
+  String email = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('MixChat'),
-      ),
-      body: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
+      backgroundColor: Colors.amberAccent,
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 24, bottom: 24),
-                  child: Text(
-                    'Ooo, sugrįžai! ;)',
-                    style: TextStyle(
-                        fontSize: 26, fontWeight: FontWeight.w800),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _emailController,
-                    validator: _emailInputValidator,
-                    decoration: const InputDecoration(hintText: 'El.paštas'),
-                    keyboardType: TextInputType.emailAddress,
-                    autofillHints: const [AutofillHints.email],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _passwordController,
-                    validator: _passwordInputValidator,
-                    decoration: const InputDecoration(
-                      hintText: 'slaptažodis',
-                    ),
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: _signIn,
-                    child: const Text(
-                      'Prisijungti',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Dar neturi paskyros?',
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .subtitle2),
-                    const SizedBox(width: 8),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(Registration.route);
-                      },
-                      child: const Text('Užsiregistruok'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 48.0,
+              ),
+              TextField(
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: 'Įveskite el.paštą')),
+              const SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  obscureText: true,
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Įveskite slaptažodį',
+                  )),
+              const SizedBox(
+                height: 24.0,
+              ),
+              RoundedButton(
+                  color: Colors.lightBlueAccent,
+                  title: 'Prisijungti',
+                  onPressed: () async {
+                    setState(() {
+                      showSpinner = true;
+                    });
+                    try {
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      if (user != null) {
+                        Navigator.pushNamed(context, ChatScreen.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                    setState(() {
+                      showSpinner = false;
+                    });
+                  }),
+
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+
+/*import 'package:flutter/material.dart';
+import 'package:mix_chat_app/screens/conversation_screen.dart';
+import 'package:mix_chat_app/screens/forgot_password_screen.dart';
+import 'package:mix_chat_app/screens/login_screen.dart';
+*/
+/*class ChatRoom extends StatefulWidget {
+  static Route get route => MaterialPageRoute(
+    builder: (context) => ChatRoom(),
+  );
+  const ChatRoom({Key? key}) : super(key: key);
+
+
+  @override
+  State<ChatRoom> createState() => _ChatRoomState();
+}
+
+class _ChatRoomState extends State<ChatRoom> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold (
+          appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
+        title: const Text ('Pagrindinis langas: kontaktai'),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => SignIn()
+              ));
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(Icons.exit_to_app)),
+          )
+        ],
+      ),
+          floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: (){
+        },
+      ),
+          body: Container(
+
+            child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(150, 40),
+                      shape: const StadiumBorder()
+                  ),
+                  child: const Text('Siųsti žinutę'),
+                  onPressed: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ForgotPassword()
+                        ));
+                    },
+                )
+
+            ),
+
+
+/*
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("lib/img/kalnai.jpg"),
+                fit: BoxFit.cover,
+                opacity: 0.5,
+              ),
+            ),
+
+ */
+
+          )
+      );
+  }
+}*/
+

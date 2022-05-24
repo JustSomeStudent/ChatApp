@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Conversation extends StatefulWidget {
+/*class Conversation extends StatefulWidget {
   const Conversation({Key? key}) : super(key: key);
 
   @override
@@ -63,4 +63,4 @@ class _ConversationState extends State<Conversation> {
       )
     );
   }
-}
+}*/

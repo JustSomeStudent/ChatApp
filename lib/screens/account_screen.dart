@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
+
+//final _firestore = FirebaseFirestore.instance;
+User loggedInUser;
+
 class AccountScreen extends StatefulWidget {
+  static const String id = 'Account_screen';
+
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
@@ -17,7 +22,7 @@ class _AccountScreenState extends State<AccountScreen>{
       print(currentUser.uid);
     }
     try {
-      await FirebaseAuth.instance.currentUser!.delete();
+      await FirebaseAuth.instance.currentUser.delete();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         print('The user must reauthenticate before this operation can be executed.');
@@ -254,4 +259,3 @@ class _AccountScreenState extends State<AccountScreen>{
     );
   }
 }
-
