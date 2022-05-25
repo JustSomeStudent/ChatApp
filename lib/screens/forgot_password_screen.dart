@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
-
+import 'rounded_button.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -25,11 +25,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          centerTitle: true,
-          title: const Text ('MixChat v0.1'),
-        ),
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
+        title: const Text ('MixChat v0.1'),
+      ),
       body: (_loading)
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -67,6 +67,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     child: const Text('Reset'),
                   ),
                 ),
+                RoundedButton(
+                  color: Colors.lightBlueAccent,
+                  title: 'Atkurti slaptažodį',
+                  onPressed: (){
+                    resetPassword();}
+                    //Navigator.push(context,
+                    //    MaterialPageRoute(builder: (context) => ForgotPassword()));},
+                ),
               ],
             ),
           ),
@@ -102,4 +110,3 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return null;
   }
 }
-

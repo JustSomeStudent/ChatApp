@@ -66,6 +66,7 @@ flutter:
   assets:
     - lib/img/pexels-photo-2486168.jpg
     - lib/img/kalnai.jpg
+    - lib/img/chat.jpg
 
   # assets:
   #   - images/a_dot_burr.jpeg
