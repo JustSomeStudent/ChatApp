@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 /*class Conversation extends StatefulWidget {
   const Conversation({Key? key}) : super(key: key);
-
   @override
   State<Conversation> createState() => _ConversationState();
 }
-
 class _ConversationState extends State<Conversation> {
   @override
   Widget build(BuildContext context) {
@@ -15,13 +13,11 @@ class _ConversationState extends State<Conversation> {
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
         title: const Text ('Conversation Screen'),
-
       ),
       body: Container(
         //alignment: Alignment.bottomCenter,
         child: Stack(
           children: [
-
             Container(
               alignment: Alignment.bottomCenter,
               child: Container(

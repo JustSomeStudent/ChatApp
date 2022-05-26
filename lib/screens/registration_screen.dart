@@ -5,6 +5,7 @@ import 'rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_screen.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mix_chat_app/screens/main_screen.dart';
 
 class Registration extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -23,7 +24,18 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amberAccent,
+      appBar: AppBar(
+        title: const Text('MixChat'),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ), onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => WelcomeScreen()));},
+        ),
+      ),
+      backgroundColor: Colors.white,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
@@ -37,7 +49,7 @@ class _RegistrationState extends State<Registration> {
                   tag: 'logo',
                   child: Container(
                     height: 200.0,
-                    child: Image.asset('images/logo.png'),
+                    child: Image.asset('lib/img/chat.jpg'),
                   ),
                 ),
               ),
@@ -46,7 +58,7 @@ class _RegistrationState extends State<Registration> {
               ),
               TextField(
                 textAlign: TextAlign.center,
-              //  obscureText: true,
+                //  obscureText: true,
                 onChanged: (value) {
                   nickname = value;
                 },
@@ -104,23 +116,9 @@ class _RegistrationState extends State<Registration> {
               RoundedButton(
                   color: Colors.blueAccent,
                   title: 'Eiti į savo paskyrą',
-                  onPressed: () async {
-                    setState(() {
-                      showSpinner = true;
-                    });
-                    try {
-                      final newUser =
-                      await _auth.createUserWithEmailAndPassword(
-                          email: email, password: password);
-                      if (newUser != null) {
-                        Navigator.pushNamed(context, AccountScreen.id);
-                      }
-                    } catch (e) {
-                      print(e);
-                    }
-                    setState(() {
-                      showSpinner = false;
-                    });
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AccountScreen()));
                   })
             ],
           ),
@@ -129,10 +127,3 @@ class _RegistrationState extends State<Registration> {
     );
   }
 }
-
-
-
-
-
-
-

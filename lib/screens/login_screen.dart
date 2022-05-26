@@ -1,9 +1,11 @@
 import 'package:mix_chat_app/constants.dart';
 import 'package:mix_chat_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mix_chat_app/screens/main_screen.dart';
 import 'rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:mix_chat_app/screens/forgot_password_screen.dart';
 
 class SignIn extends StatefulWidget {
   static const String id = 'login_screen';
@@ -21,7 +23,18 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amberAccent,
+      appBar: AppBar(
+        title: const Text('MixChat'),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ), onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => WelcomeScreen()));},
+        ),
+      ),
+      backgroundColor: Colors.white,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
@@ -35,7 +48,7 @@ class _SignInState extends State<SignIn> {
                   tag: 'logo',
                   child: Container(
                     height: 200.0,
-                    child: Image.asset('images/logo.png'),
+                    child: Image.asset('lib/img/chat.jpg'),
                   ),
                 ),
               ),
@@ -83,6 +96,14 @@ class _SignInState extends State<SignIn> {
                     });
                   }),
 
+              RoundedButton(
+                  color: Colors.lightBlueAccent,
+                  title: 'Pamiršau slaptažodį',
+                onPressed: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ForgotPassword()));},
+                  ),
+
             ],
           ),
         ),
@@ -102,12 +123,9 @@ import 'package:mix_chat_app/screens/login_screen.dart';
     builder: (context) => ChatRoom(),
   );
   const ChatRoom({Key? key}) : super(key: key);
-
-
   @override
   State<ChatRoom> createState() => _ChatRoomState();
 }
-
 class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
@@ -136,7 +154,6 @@ class _ChatRoomState extends State<ChatRoom> {
         },
       ),
           body: Container(
-
             child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size(150, 40),
@@ -149,10 +166,7 @@ class _ChatRoomState extends State<ChatRoom> {
                         ));
                     },
                 )
-
             ),
-
-
 /*
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -161,11 +175,8 @@ class _ChatRoomState extends State<ChatRoom> {
                 opacity: 0.5,
               ),
             ),
-
  */
-
           )
       );
   }
 }*/
-
