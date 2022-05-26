@@ -1,4 +1,5 @@
 import 'package:mix_chat_app/constants.dart';
+import 'package:mix_chat_app/screens/account_screen.dart';
 import 'package:mix_chat_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:mix_chat_app/screens/main_screen.dart';
@@ -53,7 +54,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               const SizedBox(
-                height: 48.0,
+                height: 24.0,
               ),
               TextField(
                   onChanged: (value) {
@@ -73,7 +74,7 @@ class _SignInState extends State<SignIn> {
                     hintText: 'Įveskite slaptažodį',
                   )),
               const SizedBox(
-                height: 24.0,
+                height: 15.0,
               ),
               RoundedButton(
                   color: Colors.lightBlueAccent,
@@ -104,6 +105,27 @@ class _SignInState extends State<SignIn> {
                       MaterialPageRoute(builder: (context) => ForgotPassword()));},
                   ),
 
+              RoundedButton(
+                  color: Colors.lightBlueAccent,
+                  title: 'Eiti į savo paskyrą',
+                  onPressed: () async {
+                    setState(() {
+                      showSpinner = true;
+                    });
+                    try {
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      if (user != null) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => AccountScreen()));
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                    setState(() {
+                      showSpinner = false;
+                    });
+                  }),
             ],
           ),
         ),

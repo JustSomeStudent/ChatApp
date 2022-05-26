@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mix_chat_app/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mix_chat_app/screens/main_screen.dart';
 
 import '../constants.dart';
 
@@ -87,15 +88,7 @@ class _AccountScreenState extends State<AccountScreen>{
                 const SizedBox(
                   height: 8.0,
                 ),
-                TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  onChanged: (value) {
-                    password = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Slaptažodį'),
-                ),
+
                 const SizedBox(
                   height: 24.0,
                 ),
@@ -117,10 +110,13 @@ class _AccountScreenState extends State<AccountScreen>{
                       child: const Text("Ištrinti profilį"),
                       onPressed: (){
                         deleteAccount();
+
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => SignIn()
+                            MaterialPageRoute(builder: (context) => WelcomeScreen()
                             ));
-                      },
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Paskyra buvo ištrinta')));
+                      }
                     ),
                   ],
                 )

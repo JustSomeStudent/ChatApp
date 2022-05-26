@@ -113,13 +113,7 @@ class _RegistrationState extends State<Registration> {
                       showSpinner = false;
                     });
                   }),
-              RoundedButton(
-                  color: Colors.blueAccent,
-                  title: 'Eiti į savo paskyrą',
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AccountScreen()));
-                  })
+
             ],
           ),
         ),
