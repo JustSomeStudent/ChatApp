@@ -43,7 +43,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 const Padding(
                   padding: EdgeInsets.only(top: 160, bottom: 24),
                   child: Text(
-                    'RESET PASSWORD',
+                    'Slaptažodžio atstatymas',
                     style: TextStyle(
                         fontSize: 26, fontWeight: FontWeight.w800),
                   ),
@@ -58,7 +58,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     autofillHints: const [AutofillHints.email],
                   ),
                 ),
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: (){
@@ -66,7 +66,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     },
                     child: const Text('Reset'),
                   ),
-                ),
+                ),*/
                 RoundedButton(
                   color: Colors.lightBlueAccent,
                   title: 'Atkurti slaptažodį',
